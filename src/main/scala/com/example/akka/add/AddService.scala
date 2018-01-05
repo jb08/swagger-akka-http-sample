@@ -14,8 +14,8 @@ import io.swagger.annotations._
 import com.example.akka.DefaultJsonFormats
 import com.example.akka.add.AddActor._
 
-@Api(value = "/add", produces = "application/json")
-@Path("/add")
+@Api(value = "/multiply", produces = "application/json")
+@Path("/multiply")
 class AddService(addActor: ActorRef)(implicit executionContext: ExecutionContext)
   extends Directives with DefaultJsonFormats {
 
@@ -26,16 +26,16 @@ class AddService(addActor: ActorRef)(implicit executionContext: ExecutionContext
 
   val route = add
 
-  @ApiOperation(value = "Add integers", nickname = "addIntegers", httpMethod = "POST", response = classOf[AddResponse])
+  @ApiOperation(value = "Multiply integers", nickname = "addIntegers", httpMethod = "POST", response = classOf[AddResponse])
   @ApiImplicitParams(Array(
-    new ApiImplicitParam(name = "body", value = "\"numbers\" to sum", required = true,
+    new ApiImplicitParam(name = "body", value = "\"numbers\" to multiply", required = true,
         dataTypeClass = classOf[AddRequest], paramType = "body")
   ))
   @ApiResponses(Array(
-    new ApiResponse(code = 500, message = "Internal server error")
+    new ApiResponse(code = 500, message = "Internal server error by Barry")
   ))
   def add =
-    path("add") {
+    path("multiply") {
       post {
         entity(as[AddRequest]) { request =>
           complete { (addActor ? request).mapTo[AddResponse] }

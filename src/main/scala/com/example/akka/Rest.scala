@@ -22,5 +22,5 @@ object Rest extends App with RouteConcatenation {
     cors() (new AddService(add).route ~
       new HelloService(hello).route ~
       SwaggerDocService.routes)
-  Http().bindAndHandle(routes, "0.0.0.0", 12345)
+  Http().bindAndHandle(routes, "0.0.0.0", 12346)
 }
